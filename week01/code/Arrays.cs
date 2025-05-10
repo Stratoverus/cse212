@@ -13,7 +13,17 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        //decalre an array for doubles
+        double[] numbers = new double[length];
+
+       //use for loop to iterate through the numbers
+        for (int i = 0; i < length; i++)
+        {
+            //This will add the number to the index. This is figured out by multiplying the number by i(since that will keep going up)
+            numbers[i] = number * (i + 1);
+        }
+        //return my array here
+        return numbers;
     }
 
     /// <summary>
@@ -29,5 +39,32 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+        
+        //declare left and right lists
+        List<int> rightList = new();
+        List<int> leftList = new();
+
+        //slice right list to get right side
+        rightList = data.GetRange(data.Count - amount, amount);
+
+        //slice left part of list to get the left side
+        leftList = data.GetRange(0, data.Count - amount);
+
+        //declare new list
+        List<int> newList =
+        [
+            //add ranges to the new list(This was added by a "quick fix" option in visual studio, not using AI)
+            .. rightList,
+            .. leftList,
+        ];
+
+        //clear old data list
+        data.Clear();
+
+        //make newlist the data list
+        data.AddRange(newList);
+
+        
+
     }
 }
