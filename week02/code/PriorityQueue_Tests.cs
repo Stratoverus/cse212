@@ -68,7 +68,7 @@ public class PriorityQueueTests
 
     [TestMethod]
     // Scenario: If there are multiple items with the highest priority, then the item closest to the front will be retrieved. Using: (Bob, 5), (Tim, 2), (Sue, 5) (Fred, 3)
-    // Expected Result: Bob
+    // Expected Result: Bob, Sue, Fred, Tim
     // Defect(s) Found: First issue, it wasn't actually removing anything from the queue. Second, the for loop was incorrect with the minus 1. 
     public void TestPriorityQueue_3()
     {
