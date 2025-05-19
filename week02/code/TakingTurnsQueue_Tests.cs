@@ -11,7 +11,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: The queue class was broken and was removing at the front instead of the back.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -43,7 +43,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
-    // Defect(s) Found: 
+    // Defect(s) Found: I'm not sure what exactly fixed this, as I was focusing on the negative and the first issue, and once I solved those, it was all fixed. I did re-arrange and make sure that everything was properly in place.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -85,7 +85,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Same as above, I'm not sure what fixed this, beside the changes I already made, so not sure what exactly I did to fix this one.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -116,7 +116,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: This one just needed a <= sign for the infinite variant.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -143,7 +143,7 @@ public class TakingTurnsQueueTests
     [TestMethod]
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
-    // Defect(s) Found: 
+    // Defect(s) Found: Worked from the beginning, thank goodness.
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
