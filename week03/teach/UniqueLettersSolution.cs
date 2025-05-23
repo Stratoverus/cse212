@@ -23,6 +23,7 @@
     private static bool AreUniqueLetters(string text)
     {
         var found = new HashSet<char>();
+        var matches = new HashSet<string>();
         foreach (var letter in text)
         {
             // Look in set to see if letter was seen before

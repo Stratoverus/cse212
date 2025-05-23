@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.VisualBasic;
 
 public static class SetsAndMaps
 {
@@ -22,7 +23,20 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var set = new HashSet<string>(words);
+        var found = new HashSet<string>();
+        foreach (var i in set)
+        {
+            string original = i;
+            string backwards = original[1].ToString() + original[0].ToString();
+            if (set.Contains(backwards) && backwards != original)
+            {
+                found.Add($"{original} & {backwards}");
+                set.Remove(original);
+                set.Remove(backwards);
+            }
+        }
+        return found.ToArray();
     }
 
     /// <summary>
@@ -43,6 +57,11 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var key = fields[3];
+            if (degrees.ContainsKey(key))
+                degrees[key] += 1;
+            else
+                degrees[key] = 1;
         }
 
         return degrees;
@@ -67,7 +86,31 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var anagram = new Dictionary<string, int>();
+        var anagram2 = new Dictionary<string, int>();
+
+        var word1NoSpaces = word1.Replace(" ", "");
+        var word2NoSpaces = word2.Replace(" ", "");
+        var length1 = word1NoSpaces.Length;
+        var length2 = word2NoSpaces.Length;
+        if (length1 != length2)
+            return false;
+        else
+            for (int i = 0; i < length1; i++)
+            {
+                char c = char.ToLower(word1NoSpaces[i]);
+                char d = char.ToLower(word2NoSpaces[i]);
+                if (anagram.ContainsKey(c.ToString()))
+                    anagram[c.ToString()] += 1;
+                else
+                    anagram[c.ToString()] = 1;
+                if (anagram2.ContainsKey(d.ToString()))
+                    anagram2[d.ToString()] += 1;
+                else
+                    anagram2[d.ToString()] = 1;
+            }
+
+        return anagram.Count == anagram2.Count && !anagram.Except(anagram2).Any();
     }
 
     /// <summary>
