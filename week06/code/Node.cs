@@ -1,3 +1,5 @@
+using System.Formats.Asn1;
+
 public class Node
 {
     public int Data { get; set; }
@@ -13,7 +15,11 @@ public class Node
     {
         // TODO Start Problem 1
 
-        if (value < Data)
+        if (value == Data)
+        {
+            return;
+        }
+        else if (value < Data)
         {
             // Insert to the left
             if (Left is null)
@@ -33,13 +39,52 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        if (value == Data)
+        {
+            return true;
+        }
+
+        else if (value < Data)
+        {
+            if (Left is null)
+            {
+                return false;
+            }
+            else
+            {
+                return Left.Contains(value);
+            }
+        }
+        else
+        {
+            if (Right is null)
+            {
+                return false;
+            }
+            return Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        if (Right is null && Left is null)
+        {
+            return 1;
+        }
+        else
+        {
+            int leftHeight = 0;
+            int rightHeight = 0;
+            if (Left is not null)
+            {
+                leftHeight = Left.GetHeight();
+            }
+            if (Right is not null)
+            {
+                rightHeight = Right.GetHeight();
+            }
+            return 1 + Math.Max(leftHeight, rightHeight);
+        }
     }
 }
